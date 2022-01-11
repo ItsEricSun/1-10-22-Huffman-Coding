@@ -26,9 +26,14 @@ public class GUI extends GBFrame {
 	
 	public static void main(String[] args) {
 		
-		Huffman hm = new Huffman("Hello World");
+		Huffman hm = new Huffman("@#*(^#");
 		hm.getF();
 		hm.printF();
+		hm.createTree();
+		hm.printCharBit();
+		hm.toBits();
+		hm.toChars();
+//		System.out.println("1011001101100110110100010101100111000");
 //		frm = new GUI();
 //		frm.setTitle("Encryption");
 //		frm.setSize(450, 200);
