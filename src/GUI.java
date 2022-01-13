@@ -26,13 +26,20 @@ public class GUI extends GBFrame {
 	
 	public static void main(String[] args) {
 		
-		Huffman hm = new Huffman("@#*(^#");
+		Huffman hm = new Huffman("a", "");
 		hm.getF();
-		hm.printF();
+//		hm.printF();
 		hm.createTree();
-		hm.printCharBit();
+//		hm.printCharBit();
 		hm.toBits();
 		hm.toChars();
+		Normal nm = new Normal("a", "");
+		nm.addChars();
+//		System.out.println(nm.bitSize());
+		nm.createMap();
+//		nm.print();
+		nm.toBits();
+		nm.toChars();
 //		System.out.println("1011001101100110110100010101100111000");
 //		frm = new GUI();
 //		frm.setTitle("Encryption");

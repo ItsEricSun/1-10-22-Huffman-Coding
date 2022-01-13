@@ -9,8 +9,9 @@ public class Huffman {
 	String bits = "";
 	HuffmanNode root;
 	
-	Huffman(String text) {
+	Huffman(String text, String bits) {
 		chars = new String(text);
+		this.bits = new String(bits);
 	}
 	
 	public void getF() {
@@ -62,6 +63,7 @@ public class Huffman {
 		}
 		root = q.poll();
 		linkCharBit(root, "");
+		if(chars.length() == 1) charBit.put(root.c, "0");
 //		System.out.println(root.data);
 //		System.out.println(root.l.c);
 //		System.out.println(root.r.data);
@@ -78,10 +80,11 @@ public class Huffman {
 	}
 	
 	public void toBits() {
+		bits = "";
 		for(int i = 0; i < chars.length(); i++) {
+			
 			char c = chars.charAt(i);
 			bits += charBit.get(c);
-			
 		}
 		System.out.println(bits);
 	}
@@ -89,6 +92,12 @@ public class Huffman {
 	public void toChars() {
 		chars = "";
 		HuffmanNode temp = root;
+		if(bits.length() == 1) {
+			
+			chars += root.c;
+			System.out.println(chars);
+			return;
+		}
 		for(int i = 0; i < bits.length(); i++) {
 //			System.out.println(i);
 			char c = bits.charAt(i);
