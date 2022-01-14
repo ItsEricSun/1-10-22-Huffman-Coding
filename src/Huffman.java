@@ -5,6 +5,7 @@ import java.util.TreeMap;
 public class Huffman {
 	TreeMap<Character, Integer> charF = new TreeMap<Character, Integer>();
 	TreeMap<Character, String> charBit = new TreeMap<Character, String>();
+	String text = "";
 	String chars = "";
 	String bits = "";
 	HuffmanNode root;
@@ -14,9 +15,32 @@ public class Huffman {
 		this.bits = new String(bits);
 	}
 	
+	Huffman(String text) {
+		this.text = new String(text);
+	}
+	
+	Huffman() {
+		
+	}
+	
+	public void createMapping() {
+		getF();
+		createTree();
+	}
+	
+	public String printMapping() {
+		String s = "";
+		for(Map.Entry<Character,String> entry : charBit.entrySet()) {
+			Character key = entry.getKey();
+			String value = entry.getValue();
+			s += key + " = " + value + "\n";
+		}
+		return s;
+	}
+	
 	public void getF() {
-		for(int i = 0; i < chars.length(); i++) {
-			char c = chars.charAt(i);
+		for(int i = 0; i < text.length(); i++) {
+			char c = text.charAt(i);
 			if(charF.containsKey(c)) {
 				int count = charF.get(c);
 				charF.replace(c, count + 1);
@@ -61,9 +85,11 @@ public class Huffman {
 			q.add(m);
 			
 		}
+		
 		root = q.poll();
+		
 		linkCharBit(root, "");
-		if(chars.length() == 1) charBit.put(root.c, "0");
+		if(root.r == null) charBit.put(root.c, "0");
 //		System.out.println(root.data);
 //		System.out.println(root.l.c);
 //		System.out.println(root.r.data);
@@ -82,7 +108,6 @@ public class Huffman {
 	public void toBits() {
 		bits = "";
 		for(int i = 0; i < chars.length(); i++) {
-			
 			char c = chars.charAt(i);
 			bits += charBit.get(c);
 		}
@@ -92,9 +117,11 @@ public class Huffman {
 	public void toChars() {
 		chars = "";
 		HuffmanNode temp = root;
-		if(bits.length() == 1) {
+		if(root.l == null) {
+			for(int i = 0; i < bits.length(); i++) {
+				chars += root.c;
+			}
 			
-			chars += root.c;
 			System.out.println(chars);
 			return;
 		}

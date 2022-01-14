@@ -4,6 +4,7 @@ import java.util.TreeMap;
 public class Normal {
 	TreeMap<Character, String> charBit = new TreeMap<Character, String>();
 	TreeMap<String, Character> bitChar = new TreeMap<String, Character>();
+	String text = "";
 	String chars = "";
 	String bits = "";
 	
@@ -12,9 +13,32 @@ public class Normal {
 		this.bits = new String(bits);
 	}
 	
+	Normal(String text) {
+		this.text = new String(text);
+	}
+	
+	Normal() {
+		
+	}
+	
+	public void createMapping() {
+		addChars();
+		createMap();
+	}
+	
+	public String printMapping() {
+		String s = "";
+		for(Map.Entry<Character,String> entry : charBit.entrySet()) {
+			Character key = entry.getKey();
+			String value = entry.getValue();
+			s += key + " = " + value + "\n";
+		}
+		return s;
+	}
+	
 	public void addChars() {
-		for(int i = 0; i < chars.length(); i++) {
-			char c = chars.charAt(i);
+		for(int i = 0; i < text.length(); i++) {
+			char c = text.charAt(i);
 			if(!charBit.containsKey(c)) {
 				charBit.put(c, "");
 			}
