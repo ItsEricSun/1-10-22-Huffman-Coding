@@ -70,7 +70,7 @@ public class GUI extends GBFrame {
 	public void buttonClicked(JButton buttonObj) {
 		if(inputTextArea.getText().length() == 0) {
 			messageBox("Error: Please Enter Input Text");
-			MainMenu();
+//			MainMenu();
 			return;
 		}
 		Huffman hm = new Huffman(inputTextArea.getText());
@@ -79,6 +79,62 @@ public class GUI extends GBFrame {
 		huffmanArea.setText(hm.printMapping());
 		nm.createMapping();
 		normalArea.setText(nm.printMapping());
+		if(buttonObj == hmCharBitButton) {
+			if(textArea.getText().length() == 0) {
+				messageBox("Error: Please Enter Text");
+//				MainMenu();
+				return;
+			}
+			String output = hm.toBits(textArea.getText());
+			if(output == null) {
+				messageBox("Error: Please Make Sure Text Contains Characters that also Appear in the Input Text");
+//				MainMenu();
+				return;
+			}
+			bitArea.setText(output);
+		} else if(buttonObj == hmBitCharButton) {
+			if(bitArea.getText().length() == 0) {
+				messageBox("Error: Please Enter Bits");
+//				MainMenu();
+				return;
+			}
+			String output = hm.toChars(bitArea.getText());
+			if(output == null) {
+				messageBox("Error: Bits Don't Match with Mapping");
+//				MainMenu();
+				return;
+			}
+			textArea.setText(output);
+		} else if(buttonObj == nmCharBitButton) {
+			if(textArea.getText().length() == 0) {
+				messageBox("Error: Please Enter Text");
+//				MainMenu();
+				return;
+			} 
+			String output = nm.toBits(textArea.getText());
+			if(output == null) {
+				messageBox("Error: Please Make Sure Text Contains Characters that also Appear in the Input Text");
+//				MainMenu();
+				return;
+			}
+			bitArea.setText(output);
+		} else if(buttonObj == nmBitCharButton) {
+			if(bitArea.getText().length() == 0) {
+				messageBox("Error: Please Enter Bits");
+//				MainMenu();
+				return;
+			}
+			String output = nm.toChars(bitArea.getText());
+			if(output == null) {
+				messageBox("Error: Bits Don't Match with Mapping");
+//				MainMenu();
+				return;
+			}
+			textArea.setText(output);
+		}
+		
+//		MainMenu();
+		
 	}
 	
 	public GUI() {
@@ -86,22 +142,6 @@ public class GUI extends GBFrame {
 	}
 	
 	public static void main(String[] args) {
-		
-//		Huffman hm = new Huffman("bbbbbaaabbbacc", "");
-//		hm.getF();
-////		hm.printF();
-//		hm.createTree();
-////		hm.printCharBit();
-//		hm.toBits();
-//		hm.toChars();
-//		Normal nm = new Normal("bbbbbaaabbbacc", "");
-//		nm.addChars();
-////		System.out.println(nm.bitSize());
-//		nm.createMap();
-////		nm.print();
-//		nm.toBits();
-//		nm.toChars();
-//		System.out.println("1011001101100110110100010101100111000");
 		frm = new GUI();
 		frm.setTitle("Huffman Tree vs. Normal Tree");
 		frm.setSize(1200, 800);

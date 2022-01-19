@@ -86,21 +86,29 @@ public class Normal {
 		}
 	}
 	
-	public void toBits() {
+	public String toBits(String s) {
 		bits = "";
-		for(int i = 0; i < chars.length(); i++) {
-			char c = chars.charAt(i);
-			bits += charBit.get(c);
+		for(int i = 0; i < s.length(); i++) {
+			String s2 = charBit.get(s.charAt(i));
+			if(s2 == null) return null;
+			bits += s2;
+//			char c = s.charAt(i);
+//			bits += charBit.get(c);
 		}
-		System.out.println(bits);
+		return bits;
+//		System.out.println(bits);
 	}
 	
-	public void toChars() {
+	public String toChars(String s) {
 		chars = "";
-		for(int i = 0; i < bits.length() / bitSize(); i++) {
-			String s = bits.substring(i * bitSize(), i * bitSize() + bitSize());
-			chars += bitChar.get(s);
+		if(s.length() % bitSize() != 0) return null;
+		for(int i = 0; i < s.length() / bitSize(); i++) {
+			String s2 = s.substring(i * bitSize(), i * bitSize() + bitSize());
+			Character s3 = bitChar.get(s2);
+			if(s3 == null) return null;
+			chars += s3;
 		}
-		System.out.println(chars);
+		return chars;
+//		System.out.println(chars);
 	}
 }

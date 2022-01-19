@@ -105,41 +105,47 @@ public class Huffman {
 		}
 	}
 	
-	public void toBits() {
+	public String toBits(String s) {
 		bits = "";
-		for(int i = 0; i < chars.length(); i++) {
-			char c = chars.charAt(i);
-			bits += charBit.get(c);
+		for(int i = 0; i < s.length(); i++) {
+			String s2 = charBit.get(s.charAt(i));
+//			char c = s.charAt(i);
+			if(s2 == null) return null;
+//			bits += charBit.get(c);
+			bits += s2;
 		}
-		System.out.println(bits);
+		return bits;
 	}
 	
-	public void toChars() {
+	public String toChars(String s) {
 		chars = "";
 		HuffmanNode temp = root;
 		if(root.l == null) {
-			for(int i = 0; i < bits.length(); i++) {
+			for(int i = 0; i < s.length(); i++) {
+				if(!(charBit.get(charBit.keySet().iterator().next())).equals("" + s.charAt(i))) return null;
 				chars += root.c;
 			}
 			
-			System.out.println(chars);
-			return;
+//			System.out.println(chars);
+			return chars;
 		}
-		for(int i = 0; i < bits.length(); i++) {
+		for(int i = 0; i < s.length(); i++) {
 //			System.out.println(i);
-			char c = bits.charAt(i);
+			char c = s.charAt(i);
 			if(c == '0') {
 				temp = temp.l;
-			} else {
+			} else if(c == '1'){
 				temp = temp.r;
 			}
+			if(i == s.length() - 1 && temp.c == null) return null;
 			if(temp.c != null) {
 				chars += temp.c;
 				temp = root;
 			}
 			
 		}
-		System.out.println(chars);
+		return chars;
+//		System.out.println(chars);
 	}
 	
 //	public static void main2() {
