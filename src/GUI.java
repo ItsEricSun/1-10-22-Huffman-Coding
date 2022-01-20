@@ -23,16 +23,16 @@ public class GUI extends GBFrame {
 		JLabel inputTextLabel = addLabel("Input Text to be used for Mapping", 1,1,4,1);
 		inputTextArea = addTextArea("", 2, 1, 4, 3);
 		inputTextArea.setLineWrap(true);
-		JLabel textLabel = addLabel("Text", 6,1,2,1);
+		JLabel textLabel = addLabel("Text (Don't Use Characters that Don't Appear in Input Text)                                                                     <====>", 6,1,2,1);
 		textArea = addTextArea("", 7, 1, 2, 4);
 		textArea.setLineWrap(true);
 		JLabel bitLabel = addLabel("Bits", 6,3,2,1);
 		bitArea = addTextArea("", 7, 3, 2, 4);
 		bitArea.setLineWrap(true);
-		JLabel hmLabel = addLabel("Huffman Character to Bit Mapping", 11,1,2,1);
+		JLabel hmLabel = addLabel("Huffman Character to Bit Mapping (No Need to Input Anything)", 11,1,2,1);
 		huffmanArea = addTextArea("", 12, 1, 2, 10);
 		textArea.setLineWrap(true);
-		JLabel nmLabel = addLabel("Normal Character to Bit Mapping", 11,3,2,1);
+		JLabel nmLabel = addLabel("Normal Character to Bit Mapping (No Need to Input Anything)", 11,3,2,1);
 		normalArea = addTextArea("", 12, 3, 2, 10);
 		bitArea.setLineWrap(true);
 		hmCharBitButton = addButton("Convert Text to Bits with Huffman Mapping", 23,1,1,1);
@@ -41,36 +41,9 @@ public class GUI extends GBFrame {
 		nmBitCharButton = addButton("Convert Bits to Text with Normal Mapping", 23,4,1,1);
 	}
 	
-	public void MainMenu() {
-		frm.getContentPane().removeAll();
-		frm.setSize(1200, 800);
-		frm.repaint();
-		JLabel inputTextLabel = addLabel("Input Text to be used for Mapping", 1,1,4,1);
-		inputTextArea = addTextArea("", 2, 1, 4, 3);
-		inputTextArea.setLineWrap(true);
-		JLabel textLabel = addLabel("Text", 6,1,2,1);
-		textArea = addTextArea("", 7, 1, 2, 4);
-		textArea.setLineWrap(true);
-		JLabel bitLabel = addLabel("Bits", 6,3,2,1);
-		bitArea = addTextArea("", 7, 3, 2, 4);
-		bitArea.setLineWrap(true);
-		JLabel hmLabel = addLabel("Huffman Character to Bit Mapping", 11,1,2,1);
-		huffmanArea = addTextArea("", 12, 1, 2, 4);
-		textArea.setLineWrap(true);
-		JLabel nmLabel = addLabel("Normal Character to Bit Mapping", 11,3,2,1);
-		normalArea = addTextArea("", 12, 3, 2, 4);
-		bitArea.setLineWrap(true);
-		hmCharBitButton = addButton("Convert Text to Bits with Huffman Mapping", 17,1,1,1);
-		hmBitCharButton = addButton("Convert Bits to Text with Huffman Mapping", 17,2,1,1);
-		nmCharBitButton = addButton("Convert Text to Bits with Normal Mapping", 17,3,1,1);
-		nmBitCharButton = addButton("Convert Bits to Text with Normal Mapping", 17,4,1,1);
-		frm.validate();
-	}
-	
 	public void buttonClicked(JButton buttonObj) {
 		if(inputTextArea.getText().length() == 0) {
 			messageBox("Error: Please Enter Input Text");
-//			MainMenu();
 			return;
 		}
 		Huffman hm = new Huffman(inputTextArea.getText());
@@ -82,59 +55,48 @@ public class GUI extends GBFrame {
 		if(buttonObj == hmCharBitButton) {
 			if(textArea.getText().length() == 0) {
 				messageBox("Error: Please Enter Text");
-//				MainMenu();
 				return;
 			}
 			String output = hm.toBits(textArea.getText());
 			if(output == null) {
 				messageBox("Error: Please Make Sure Text Contains Characters that also Appear in the Input Text");
-//				MainMenu();
 				return;
 			}
 			bitArea.setText(output);
 		} else if(buttonObj == hmBitCharButton) {
 			if(bitArea.getText().length() == 0) {
 				messageBox("Error: Please Enter Bits");
-//				MainMenu();
 				return;
 			}
 			String output = hm.toChars(bitArea.getText());
 			if(output == null) {
 				messageBox("Error: Bits Don't Match with Mapping");
-//				MainMenu();
 				return;
 			}
 			textArea.setText(output);
 		} else if(buttonObj == nmCharBitButton) {
 			if(textArea.getText().length() == 0) {
 				messageBox("Error: Please Enter Text");
-//				MainMenu();
 				return;
 			} 
 			String output = nm.toBits(textArea.getText());
 			if(output == null) {
 				messageBox("Error: Please Make Sure Text Contains Characters that also Appear in the Input Text");
-//				MainMenu();
 				return;
 			}
 			bitArea.setText(output);
 		} else if(buttonObj == nmBitCharButton) {
 			if(bitArea.getText().length() == 0) {
 				messageBox("Error: Please Enter Bits");
-//				MainMenu();
 				return;
 			}
 			String output = nm.toChars(bitArea.getText());
 			if(output == null) {
 				messageBox("Error: Bits Don't Match with Mapping");
-//				MainMenu();
 				return;
 			}
 			textArea.setText(output);
 		}
-		
-//		MainMenu();
-		
 	}
 	
 	public GUI() {
@@ -147,5 +109,4 @@ public class GUI extends GBFrame {
 		frm.setSize(1200, 800);
 		frm.setVisible(true);
 	}
-
 }

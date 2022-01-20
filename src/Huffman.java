@@ -6,21 +6,10 @@ public class Huffman {
 	TreeMap<Character, Integer> charF = new TreeMap<Character, Integer>();
 	TreeMap<Character, String> charBit = new TreeMap<Character, String>();
 	String text = "";
-	String chars = "";
-	String bits = "";
 	HuffmanNode root;
-	
-	Huffman(String text, String bits) {
-		chars = new String(text);
-		this.bits = new String(bits);
-	}
 	
 	Huffman(String text) {
 		this.text = new String(text);
-	}
-	
-	Huffman() {
-		
 	}
 	
 	public void createMapping() {
@@ -50,22 +39,6 @@ public class Huffman {
 		}
 	}
 	
-	public void printF() {
-		for(Map.Entry<Character,Integer> entry : charF.entrySet()) {
-			Character key = entry.getKey();
-			Integer value = entry.getValue();
-			System.out.println(key + " = " + value);
-		}
-	}
-	
-	public void printCharBit() {
-		for(Map.Entry<Character,String> entry : charBit.entrySet()) {
-			Character key = entry.getKey();
-			String value = entry.getValue();
-			System.out.println(key + " = " + value);
-		}
-	}
-	
 	public void createTree() {
 		PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(new MyComparator());
 		for(Map.Entry<Character,Integer> entry : charF.entrySet()) {
@@ -74,7 +47,6 @@ public class Huffman {
 			hn.c = entry.getKey();
 			q.add(hn);
 		}
-		
 		while(q.size() > 1) {
 			HuffmanNode l = q.poll();
 			HuffmanNode r = q.poll();
@@ -83,17 +55,10 @@ public class Huffman {
 			m.l = l;
 			m.r = r;
 			q.add(m);
-			
 		}
-		
 		root = q.poll();
-		
 		linkCharBit(root, "");
 		if(root.r == null) charBit.put(root.c, "0");
-//		System.out.println(root.data);
-//		System.out.println(root.l.c);
-//		System.out.println(root.r.data);
-//		System.out.println(q.size());
 	}
 	
 	public void linkCharBit(HuffmanNode r, String s) {
@@ -106,31 +71,26 @@ public class Huffman {
 	}
 	
 	public String toBits(String s) {
-		bits = "";
+		String bits = "";
 		for(int i = 0; i < s.length(); i++) {
 			String s2 = charBit.get(s.charAt(i));
-//			char c = s.charAt(i);
 			if(s2 == null) return null;
-//			bits += charBit.get(c);
 			bits += s2;
 		}
 		return bits;
 	}
 	
 	public String toChars(String s) {
-		chars = "";
+		String chars = "";
 		HuffmanNode temp = root;
 		if(root.l == null) {
 			for(int i = 0; i < s.length(); i++) {
 				if(!(charBit.get(charBit.keySet().iterator().next())).equals("" + s.charAt(i))) return null;
 				chars += root.c;
 			}
-			
-//			System.out.println(chars);
 			return chars;
 		}
 		for(int i = 0; i < s.length(); i++) {
-//			System.out.println(i);
 			char c = s.charAt(i);
 			if(c == '0') {
 				temp = temp.l;
@@ -142,23 +102,7 @@ public class Huffman {
 				chars += temp.c;
 				temp = root;
 			}
-			
 		}
 		return chars;
-//		System.out.println(chars);
 	}
-	
-//	public static void main2() {
-//		String text = "Hello World";
-//		input = new String(text);
-//		getF();
-//		printF(); 
-//	}
-//	
-//	public static void main(String[] args) {
-//		main2();
-//	
-//
-//	}
-
 }

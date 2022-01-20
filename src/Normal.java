@@ -5,20 +5,9 @@ public class Normal {
 	TreeMap<Character, String> charBit = new TreeMap<Character, String>();
 	TreeMap<String, Character> bitChar = new TreeMap<String, Character>();
 	String text = "";
-	String chars = "";
-	String bits = "";
-	
-	Normal(String text, String bits) {
-		chars = new String(text);
-		this.bits = new String(bits);
-	}
 	
 	Normal(String text) {
 		this.text = new String(text);
-	}
-	
-	Normal() {
-		
 	}
 	
 	public void createMapping() {
@@ -73,34 +62,18 @@ public class Normal {
 		return temp + s;
 	}
 	
-	public void print() {
-		for(Map.Entry<Character,String> entry : charBit.entrySet()) {
-			Character key = entry.getKey();
-			String value = entry.getValue();
-			System.out.println(key + " = " + value);
-		}
-		for(Map.Entry<String,Character> entry : bitChar.entrySet()) {
-			String key = entry.getKey();
-			Character value = entry.getValue();
-			System.out.println(key + " = " + value);
-		}
-	}
-	
 	public String toBits(String s) {
-		bits = "";
+		String bits = "";
 		for(int i = 0; i < s.length(); i++) {
 			String s2 = charBit.get(s.charAt(i));
 			if(s2 == null) return null;
 			bits += s2;
-//			char c = s.charAt(i);
-//			bits += charBit.get(c);
 		}
 		return bits;
-//		System.out.println(bits);
 	}
 	
 	public String toChars(String s) {
-		chars = "";
+		String chars = "";
 		if(s.length() % bitSize() != 0) return null;
 		for(int i = 0; i < s.length() / bitSize(); i++) {
 			String s2 = s.substring(i * bitSize(), i * bitSize() + bitSize());
@@ -109,6 +82,5 @@ public class Normal {
 			chars += s3;
 		}
 		return chars;
-//		System.out.println(chars);
 	}
 }

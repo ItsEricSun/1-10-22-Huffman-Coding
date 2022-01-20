@@ -1,6 +1,5 @@
 
 public class HuffmanNode {
-	
 	int data;
 	Character c = null;
 	
